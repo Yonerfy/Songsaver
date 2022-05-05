@@ -18,6 +18,18 @@ export default function ShowSongs(props) {
         Sort Song A-Z{" "}
         <input type="checkbox" name="sort" onClick={props.handleCheckbox} />
       </label>
+
+      <label htmlFor="songs">
+        Categorize:
+        <select name="categorize" id="categorize" onChange={props.handleSelect}>
+          <option value="all">All</option>
+          <option value="Rock">Rock</option>
+          <option value="Jazz">Jazz</option>
+          <option value="Pop">Pop</option>
+          <option value="Salsa">Salsa</option>
+        </select>
+      </label>
+
       <table style={{ width: "100%" }}>
         <thead>
           <tr className="song-header">
