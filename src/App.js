@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import ShowSongs from "./components/ShowSongs";
+import SongForm from "./components/SongForm";
+import { nanoid } from "nanoid";
 
 function App() {
+  const [songs, setSongs] = useState([]);
+
+  function handleOnsubmit(e) {
+    e.preventDefault();
+    if (e.target[0].value && e.target[1].value) {
+      setSongs((prevSongs) => {
+        return [
+          ...prevSongs,
+          {
+            [e.target[0].name]: e.target[0].value,
+            [e.target[1].name]: e.target[1].value,
+            [e.target[2].name]: e.target[2].value,
+            [e.target[3].name]: e.target[3].value,
+            itemKey: nanoid(),
+          },
+        ];
+      });
+    }
+  }
+
+  function deleteBtn(id) {
+    const newSongs = songs.filter((item) => item.itemKey !== id);
+    setSongs(newSongs);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Yonerfy SongSaver</h1>
       </header>
+      <main>
+        <SongForm handleOnsubmit={handleOnsubmit} songs={songs} />
+        <ShowSongs songs={songs} deleteBtn={deleteBtn} />
+      </main>
     </div>
   );
 }
