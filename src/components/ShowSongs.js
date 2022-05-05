@@ -14,6 +14,10 @@ export default function ShowSongs(props) {
   }
   return (
     <div>
+      <label htmlFor="sort">
+        Sort Song A-Z{" "}
+        <input type="checkbox" name="sort" onClick={props.handleCheckbox} />
+      </label>
       <table style={{ width: "100%" }}>
         <thead>
           <tr className="song-header">
