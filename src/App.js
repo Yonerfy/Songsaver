@@ -25,9 +25,22 @@ function App() {
     }
   }
 
+  function handleCheckbox(e) {
+    e.target.checked === true && sortingAtoZ();
+  }
+
   function deleteBtn(id) {
     const newSongs = songs.filter((item) => item.itemKey !== id);
     setSongs(newSongs);
+  }
+
+  function sortingAtoZ() {
+    const newSortingSongs = [...songs].sort((a, b) => {
+      if (a.song < b.song) return -1;
+      if (a.song > b.song) return 1;
+      return 0;
+    });
+    setSongs(newSortingSongs);
   }
 
   return (
@@ -37,7 +50,11 @@ function App() {
       </header>
       <main>
         <SongForm handleOnsubmit={handleOnsubmit} songs={songs} />
-        <ShowSongs songs={songs} deleteBtn={deleteBtn} />
+        <ShowSongs
+          songs={songs}
+          deleteBtn={deleteBtn}
+          handleCheckbox={handleCheckbox}
+        />
       </main>
     </div>
   );
