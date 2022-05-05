@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 
 function App() {
   const [songs, setSongs] = useState([]);
+  const [category, setCategory] = useState([]);
 
   function handleOnsubmit(e) {
     e.preventDefault();
@@ -22,11 +23,33 @@ function App() {
           },
         ];
       });
+      setCategory((prevCategory) => {
+        return [
+          ...prevCategory,
+          {
+            [e.target[0].name]: e.target[0].value,
+            [e.target[1].name]: e.target[1].value,
+            [e.target[2].name]: e.target[2].value,
+            [e.target[3].name]: e.target[3].value,
+            itemKey: nanoid(),
+          },
+        ];
+      });
     }
   }
 
   function handleCheckbox(e) {
     e.target.checked === true && sortingAtoZ();
+  }
+
+  function handleSelect(e) {
+    if (e.target.value === "all") {
+      return setSongs(category);
+    }
+    const songsCategorize = category.filter(
+      (item) => item.genre === e.target.value
+    );
+    setSongs(songsCategorize);
   }
 
   function deleteBtn(id) {
@@ -54,6 +77,8 @@ function App() {
           songs={songs}
           deleteBtn={deleteBtn}
           handleCheckbox={handleCheckbox}
+          handleSelect={handleSelect}
+          category={category}
         />
       </main>
     </div>
