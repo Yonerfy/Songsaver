@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ShowSongs from "./components/ShowSongs";
 import SongForm from "./components/SongForm";
 import { nanoid } from "nanoid";
+import { Outlet, Link } from "react-router-dom";
 
 function App() {
   const [songs, setSongs] = useState([]);
@@ -71,6 +72,10 @@ function App() {
       <header className="App-header">
         <h1>Yonerfy SongSaver</h1>
       </header>
+      <nav>
+        <Link to="/about">About Me</Link>
+      </nav>
+      <Outlet />
       <main>
         <SongForm handleOnsubmit={handleOnsubmit} songs={songs} />
         <ShowSongs
