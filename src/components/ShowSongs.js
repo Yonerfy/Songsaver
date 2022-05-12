@@ -1,12 +1,15 @@
 import React from "react";
 import SongList from "./SongList";
+import { useSelector } from "react-redux";
+import { nanoid } from "nanoid";
 
 export default function ShowSongs(props) {
-  function returnSongList(props) {
-    return props.songs.map((song) => (
+  const songs = useSelector((state) => state.songs);
+  function returnSongList() {
+    return songs.map((song) => (
       <SongList
         songs={song}
-        key={song.itemKey}
+        key={nanoid()}
         deleteBtn={props.deleteBtn}
         itemKey={song.itemKey}
       />
@@ -40,7 +43,7 @@ export default function ShowSongs(props) {
           </tr>
         </thead>
 
-        {returnSongList(props)}
+        {returnSongList()}
       </table>
     </div>
   );
