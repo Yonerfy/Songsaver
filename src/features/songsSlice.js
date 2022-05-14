@@ -19,28 +19,16 @@ const songsSlice = createSlice({
         return 0;
       });
     },
-    songsPop(state) {
-      return state.filter((song) => song.genre === "Pop");
+    songsFilter(state, action) {
+      return state.filter((song) => song.genre === action.payload.genre);
     },
-    songsRock(state) {
-      return state.filter((song) => song.genre === "Rock");
-    },
-    songsJazz(state) {
-      return state.filter((song) => song.genre === "Jazz");
-    },
-    songsSalsa(state) {
-      return state.filter((song) => song.genre === "Salsa");
+    deleteSong(state, action) {
+      return state.filter((song) => song.id !== action.payload.id);
     },
   },
 });
 
-export const {
-  songsAdded,
-  songsSort,
-  songsPop,
-  songsRock,
-  songsJazz,
-  songsSalsa,
-} = songsSlice.actions;
+export const { songsAdded, songsSort, deleteSong, songsFilter } =
+  songsSlice.actions;
 
 export default songsSlice.reducer;

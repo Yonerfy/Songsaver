@@ -9,7 +9,7 @@ export default function SongList(props) {
         <th className="song-row__item">{props.songs.genre}</th>
         <th className="song-row__item">{props.songs.rating}</th>
         <th className="song-row__item">
-          <button onClick={() => props.deleteBtn(props.songs.itemKey)}>
+          <button onClick={() => props.deleteBtn(props.songs.id)}>
             Delete
           </button>
         </th>

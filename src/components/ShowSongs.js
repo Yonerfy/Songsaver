@@ -5,7 +5,9 @@ import { nanoid } from "nanoid";
 
 export default function ShowSongs(props) {
   const songs = useSelector((state) => state.songs);
+
   function returnSongList() {
+    console.log(props);
     return songs.map((song) => (
       <SongList
         songs={song}
