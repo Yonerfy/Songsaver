@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import SongList from "./SongList";
 import { useSelector } from "react-redux";
 import { nanoid } from "nanoid";
+import { songsFilter } from "../features/songsSlice";
+import { useDispatch } from "react-redux";
 
 export default function ShowSongs(props) {
   const songs = useSelector((state) => state.songs);
 
-  function returnSongList() {
-    console.log(props);
-    return songs.map((song) => (
-      <SongList
-        songs={song}
-        key={nanoid()}
-        deleteBtn={props.deleteBtn}
-        itemKey={song.itemKey}
-      />
-    ));
-  }
+  // console.log();
+  const dispatch = useDispatch();
+
+  const returnSongList = () => {
+    if (true) {
+      return songs.filter((song) => song);
+    }
+    if (true) {
+      return songs.filter((song) => song.genre === "Rock");
+    }
+    if (true) {
+      return songs.filter((song) => song.genre === "Jazz");
+    }
+    if (true) {
+      return songs.filter((song) => song.genre === "Salsa");
+    }
+    return songs;
+  };
+  // console.log(returnSongList());
   return (
     <div>
       <label htmlFor="sort">
@@ -24,16 +34,7 @@ export default function ShowSongs(props) {
         <input type="checkbox" name="sort" onClick={props.handleCheckbox} />
       </label>
 
-      <label htmlFor="songs">
-        Categorize:
-        <select name="categorize" id="categorize" onChange={props.handleSelect}>
-          <option value="all">All</option>
-          <option value="Rock">Rock</option>
-          <option value="Jazz">Jazz</option>
-          <option value="Pop">Pop</option>
-          <option value="Salsa">Salsa</option>
-        </select>
-      </label>
+      <label htmlFor="songs">Categorize:</label>
 
       <table style={{ width: "100%" }}>
         <thead>
@@ -45,7 +46,11 @@ export default function ShowSongs(props) {
           </tr>
         </thead>
 
-        {returnSongList()}
+        {songs.map((song) => {
+          return (
+            <SongList songs={song} key={nanoid()} deleteBtn={props.deleteBtn} />
+          );
+        })}
       </table>
     </div>
   );

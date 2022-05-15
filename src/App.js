@@ -37,9 +37,7 @@ function App() {
     e.target.checked === true && dispatch(songsSort());
   }
 
-  function handleSelect(e) {
-    dispatch(songsFilter({ genre: e.target.value }));
-  }
+  function handleSelect() {}
 
   function deleteBtn(id) {
     dispatch(deleteSong({ id }));

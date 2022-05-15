@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [
-  { id: 1, song: "mi vida", artist: "First artist!", genre: "Rock", rating: 5 },
+  {
+    id: 1,
+    song: "mi vida",
+    artist: "First artist!",
+    genre: "Rock",
+    rating: 5,
+  },
   { id: 2, song: "jehova", artist: "Second Post", genre: "Pop", rating: 4 },
 ];
 
@@ -19,9 +25,7 @@ const songsSlice = createSlice({
         return 0;
       });
     },
-    songsFilter(state, action) {
-      return state.filter((song) => song.genre === action.payload.genre);
-    },
+
     deleteSong(state, action) {
       return state.filter((song) => song.id !== action.payload.id);
     },
