@@ -25,6 +25,9 @@ const songsSlice = createSlice({
         return 0;
       });
     },
+    songsTest(state, action) {
+      return state.filter((song) => song.genre === action.payload);
+    },
 
     deleteSong(state, action) {
       return state.filter((song) => song.id !== action.payload.id);
@@ -32,7 +35,7 @@ const songsSlice = createSlice({
   },
 });
 
-export const { songsAdded, songsSort, deleteSong, songsFilter } =
+export const { songsAdded, songsSort, deleteSong, songsTest } =
   songsSlice.actions;
 
 export default songsSlice.reducer;

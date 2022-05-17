@@ -10,6 +10,7 @@ import {
   songsSort,
   deleteSong,
 } from "./features/songsSlice";
+import { filterAdded } from "./features/filterSongSlice";
 
 import { useSelector } from "react-redux";
 
@@ -30,6 +31,15 @@ function App() {
           [e.target[3].name]: e.target[3].value,
         })
       );
+      // dispatch(
+      //   filterAdded({
+      //     id: nanoid(),
+      //     [e.target[0].name]: e.target[0].value,
+      //     [e.target[1].name]: e.target[1].value,
+      //     [e.target[2].name]: e.target[2].value,
+      //     [e.target[3].name]: e.target[3].value,
+      //   })
+      // );
     }
   }
 
