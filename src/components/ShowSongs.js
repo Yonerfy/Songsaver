@@ -1,41 +1,22 @@
-import React, { useState, useEffect } from "react";
 import SongList from "./SongList";
 import { useSelector } from "react-redux";
 import { nanoid } from "nanoid";
-
+import { selectFilterSongs } from "../features/filterSlice";
 import { songsFilter } from "../features/filterSlice";
 import { useDispatch } from "react-redux";
 
-export default function ShowSongs(props) {
-  const filterSongs = useSelector((state) => {
-    if (state.filter.song === "all") {
-      return state.songs;
-    }
-    if (state.filter.song === "Rock") {
-      return state.songs.filter((song) => song.genre === "Rock");
-    }
-    if (state.filter.song === "Pop") {
-      return state.songs.filter((song) => song.genre === "Pop");
-    }
-    if (state.filter.song === "Salsa") {
-      return state.songs.filter((song) => song.genre === "Salsa");
-    }
-    if (state.filter.song === "Jazz") {
-      return state.songs.filter((song) => song.genre === "Jazz");
-    }
-    return state.songs;
-  });
-
+export default function ShowSongs({ handleCheckbox, deleteBtn }) {
+  const filterSongs = useSelector((state) => selectFilterSongs(state));
   const dispatch = useDispatch();
 
   return (
     <div>
       <label htmlFor="sort">
         Sort Song A-Z{" "}
-        <input type="checkbox" name="sort" onClick={props.handleCheckbox} />
+        <input type="checkbox" name="sort" onClick={handleCheckbox} />
       </label>
 
-      <label htmlFor="songs">
+      <label htmlFor="songs" className="labelSongs">
         Categorize:
         <select
           name="categorize"
@@ -53,19 +34,17 @@ export default function ShowSongs(props) {
       </label>
 
       <table style={{ width: "100%" }}>
-        <thead>
-          <tr className="song-header">
-            <th className="song-row__item">Song</th>
-            <th className="song-row__item">Artist</th>
-            <th className="song-row__item">Genre</th>
-            <th className="song-row__item">Rating</th>
+        <thead className="song-header">
+          <tr>
+            <th className="header-title">Song</th>
+            <th className="header-title">Artist</th>
+            <th className="header-title">Genre</th>
+            <th className="header-title">Rating</th>
           </tr>
         </thead>
 
         {filterSongs.map((song) => {
-          return (
-            <SongList songs={song} key={nanoid()} deleteBtn={props.deleteBtn} />
-          );
+          return <SongList songs={song} key={nanoid()} deleteBtn={deleteBtn} />;
         })}
       </table>
     </div>

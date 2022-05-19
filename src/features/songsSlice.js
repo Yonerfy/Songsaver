@@ -3,12 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = [
   {
     id: 1,
-    song: "mi vida",
-    artist: "First artist!",
+    song: "Maniac",
+    artist: "Michael Sembello",
     genre: "Rock",
     rating: 5,
   },
-  { id: 2, song: "jehova", artist: "Second Post", genre: "Pop", rating: 4 },
+  {
+    id: 2,
+    song: "You rock my world",
+    artist: "Michael Jackson",
+    genre: "Pop",
+    rating: 4,
+  },
 ];
 
 const songsSlice = createSlice({
@@ -20,7 +26,7 @@ const songsSlice = createSlice({
     },
     songsSort(state) {
       state.sort((a, b) => {
-        if (a.song < b.song) return -1;
+        if (a.song.toLowerCase() < b.song.toLowerCase()) return -1;
         if (a.song > b.song) return 1;
         return 0;
       });

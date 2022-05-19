@@ -1,20 +1,20 @@
 import React from "react";
 
-export default function SongForm(props) {
+export default function SongForm({ handleOnsubmit, song, artist }) {
   return (
     <div>
-      <form onSubmit={props.handleOnsubmit} className="form-container">
+      <form onSubmit={handleOnsubmit} className="form-container">
         <input
           name="song"
           id="song"
-          value={props.song}
+          value={song}
           type="text"
           placeholder="Song"
         />
         <input
           name="artist"
           id="artist"
-          value={props.artist}
+          value={artist}
           type="text"
           placeholder="Artist"
         />
@@ -39,7 +39,7 @@ export default function SongForm(props) {
             <option value="5">5</option>
           </select>
         </label>
-        <button>Add Song</button>
+        <button className="btn">Add Song</button>
       </form>
     </div>
   );
